@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::post('/user/reg','TestController@reg');  // 用户注册
+Route::post('/user/login','TestController@login');  // 用户登录
+Route::get('/api/user/list','Api\TestController@userList')->middleware('filter');  // 用户登录

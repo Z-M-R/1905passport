@@ -41,17 +41,19 @@ class TestController extends Controller
 
     public function login()
     {
-    	$code=request()->input('code');
+		$code=request()->input('code');
     	$pwd=request()->input('pwd');
     	if (strpos($code, "@")) {
     		//按邮箱查
-    		$bool=belief::where('email',$code)->first();
+    		$bool=TestModel::where('email',$code)->first();
     		if ($bool) {
     			$res=password_verify($pwd,$bool->pwd);
     			if ($res) {
     				//把信息存在redis中
     				$token=md5(uniqid().rand(1000,9999)); 
-    				Redis::set($bool->name,$token,7200); 
+    				Redis::set($bool->email,$token,7200); 
+                   
+                    echo $token;
     				return json_encode(['code'=>1,'msg'=>'登录成功']);
 
 
@@ -67,6 +69,10 @@ class TestController extends Controller
     			$res=password_verify($pwd,$bool->pwd);
     			if ($res) {
     				//把信息存在redis中
+                    $token=md5(uniqid().rand(1000,9999)); 
+                    Redis::set($bool->name,$token,7200); 
+                   
+                    echo $token;
     				return json_encode(['code'=>1,'msg'=>'登录成功']);
     			}else{
     				return json_encode(['code'=>444,'msg'=>'登录失败']);
@@ -76,7 +82,7 @@ class TestController extends Controller
     		}
     		echo "名字";
     	}
-    }
+	}
 
 
     public function getinfo()
@@ -91,7 +97,7 @@ class TestController extends Controller
 
 
     	if ($token==$rtoken) {
-    		return json_encode(['code'=>1,'msg'=>'您请求的信息为....']);die;
+    		return json_encode(['code'=>1,'msg'=>'您请求的信息已成功']);die;
     	}else{
     		return json_encode(['code'=>444,'msg'=>'查询不到您的信息请重新登录']);
     	}

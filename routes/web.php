@@ -23,5 +23,6 @@ Route::get('/api/user/list','Api\TestController@userList')->middleware('filter')
 
 Route::prefix('test/belief')->group(function(){//前台登录页
     Route::any('reg','User\TestController@reg');//后台列表页deinfo
-    Route::any('login','User\TestfController@login');//后台列表页deinfo
+    Route::any('login','User\TestController@login');//后台列表页deinfo
+    Route::any('getinfo','User\TestController@getinfo');//后台列表页deinfo
 });

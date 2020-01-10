@@ -51,6 +51,8 @@ class TestController extends Controller
     {
         $name = $request->input('name');
         $pass = $request->input('pass');
+        $email = $request->input('email');
+        $mobile = $request->input('mobile');
 
         // echo "pass：" . $pass;
 

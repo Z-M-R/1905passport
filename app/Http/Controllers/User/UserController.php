@@ -390,9 +390,11 @@ class UserController extends Controller
             return $response;
         }
         $redis_token_key = 'str:user:token:'.$uid;
+        //echo $redis_token_key;echo '</br>';
 
         //验证token是否有效
         $cache_token = Redis::get($redis_token_key);
+        //var_dump($cache_token);die;
         if($token==$cache_token)        // token 有效
         {
             $response = [

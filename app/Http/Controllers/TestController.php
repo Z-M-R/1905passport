@@ -30,6 +30,31 @@ class TestController extends Controller
             echo "验签失败";
         }
 
-        echo '15210772510';
+//        echo '15210772510';
     }
+
+    public function check2()
+    {
+
+        $key = "2001";
+
+        echo '<pre>';print_r($_POST);
+        //接收数据 和 签名
+        $json_data = $_POST['data'];
+        $sign = $_POST['sign'];
+
+        //计算签名
+        $sign2 = md5($json_data.$key);
+        echo "接收端计算的签名：".$sign2;echo "<br>";
+
+        // 比较接收到的签名
+        if($sign2==$sign){
+            echo "验签成功";
+        }else{
+            echo "验签失败";
+        }
+
+
+    }
+
 }

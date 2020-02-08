@@ -91,4 +91,18 @@ class TestController extends Controller
 
     }
 
+    public function rsadescypt()
+    {
+        $enc_data_str = $_GET['data'];
+
+        echo "接收到的密文：". $enc_data_str;echo '</br>';
+        $base64_decode_str = base64_decode($enc_data_str);
+        echo '<hr>';
+        //解密
+        $pub_key = file_get_contents(storage_path('keys/pubkey2'));
+        openssl_public_decrypt($base64_decode_str,$dec_data,$pub_key);
+        echo "解密数据：" . $dec_data;
+    }
+
+
 }

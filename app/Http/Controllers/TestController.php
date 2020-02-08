@@ -33,7 +33,7 @@ class TestController extends Controller
 //        echo '15210772510';
     }
 
-    public function check2()
+    public function check1()
     {
 
         $key = "2001";
@@ -53,7 +53,28 @@ class TestController extends Controller
         }else{
             echo "验签失败";
         }
+    }
 
+    public function Check2()
+    {
+        echo '<pre>';print_r($_GET);echo '</pre>';
+        $data=$_GET['qian'];
+        $sign=$_GET['sign'];
+
+        $sign_str=base64_decode($sign);
+        echo "base64_decode后的数据 ：".$sign_str;echo '</br>';
+
+        //验签
+        $path=storage_path('keys/pubkey2');
+        $pkeyid=openssl_pkey_get_public("file://".$path);
+
+        $d=openssl_verify($data,$sign_str,$pkeyid);
+        openssl_free_key($pkeyid);
+        if($d==1){
+            echo "验签成功";
+        }else{
+            echo "验签失败";
+        }
 
     }
 

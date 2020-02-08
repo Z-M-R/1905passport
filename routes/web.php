@@ -25,3 +25,4 @@ Route::get('/test/check','TestController@md5');     //注册
 Route::post('/test/check1','TestController@check1'); 	// 验证签名
 
 Route::get('/test/check2','TestController@Check2');    //密钥验签
+Route::get('/decrypt','TestController@decrypt');

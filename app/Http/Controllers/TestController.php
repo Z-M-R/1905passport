@@ -78,4 +78,17 @@ class TestController extends Controller
 
     }
 
+    public function decrypt()
+    {
+        $data = base64_decode($_GET['data']);
+        $method = 'AES-256-CBC';
+        $key = 'zhang';
+        $iv = 'WUSD8796IDjhkchd';
+
+        //解密
+        $dec_data = openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
+        echo "解密数据：" . $dec_data;
+
+    }
+
 }
